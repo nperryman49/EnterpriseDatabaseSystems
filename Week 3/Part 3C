@@ -1,0 +1,9 @@
+-- Naomi Perryman Fall 2022
+-- selecting and organizing data from the products table 
+
+select categories.category_name, count(products.product_id), sum(order_items.quantity)
+from products
+inner join categories on products.category_id=categories.category_id
+inner join order_items on products.product_id=order_items.product_id
+group by categories.category_name
+order by count(products.product_id) DESC;
