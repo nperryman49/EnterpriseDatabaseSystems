@@ -1,0 +1,5 @@
+-- Naomi Perryman Fall 2022
+-- Using count functions 
+
+Select count(*), SUM(ship_amount) as "Ship Value" 
+from orders;
