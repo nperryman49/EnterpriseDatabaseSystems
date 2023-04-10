@@ -1,0 +1,9 @@
+-- Naomi Perryman Fall 2022
+-- selecting and organizing data from the different tables with the rollup function 
+
+select categories.category_name, products.product_name, sum(order_items.quantity)
+from products
+inner join categories on products.category_id=categories.category_id
+inner join order_items on products.product_id=order_items.product_id
+group by category_name, product_name with rollup
+order by categories.category_name;
