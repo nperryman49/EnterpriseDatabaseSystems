@@ -1,0 +1,5 @@
+-- Naomi Perryman Fall 2022
+-- Using count and min/max functions
+
+select count(product_id), max(list_price)
+from products;
