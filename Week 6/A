@@ -1,0 +1,21 @@
+-- Naomi Perryman Fall 2022
+-- Creating a procedure that will count the products and output a message depending on the output amount 
+
+use naomi_guitar_shop;
+drop procedure if exists ProductCount;
+delimiter //
+create procedure ProductCount()
+Begin
+  declare ProductCount_Var int;
+  select count(*)
+  into ProductCount_Var
+  from products;
+if ProductCount_Var >=18 then
+  select "The number of products is greater than or equal to 18." as Message;
+else
+  select "The number of products is less than 18." as Message;
+end if;
+end //
+delimiter ;
+
+call ProductCount();
