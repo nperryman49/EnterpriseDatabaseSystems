@@ -1,0 +1,26 @@
+-- Naomi Perryman Fall 2022
+-- Creating a procedure that will calculate a new product price with a parameter accepted  
+
+drop function if exists new_price;
+delimiter //
+
+create function new_price
+(
+item_id_param int
+)
+returns decimal(9,2)
+deterministic reads sql data
+Begin
+  declare price_output decimal(9,2);
+  select (item_price-discount_amount)
+  into price_output
+  from order_items
+  where item_id=item_id_param;
+  return price_output;
+end //
+
+delimiter ;
+
+select item_id, order_id, new_price(item_id) as NewPrice
+from order_items
+where item_id=5
