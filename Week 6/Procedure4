@@ -1,0 +1,30 @@
+-- Naomi Perryman Fall 2022
+-- Creating a procedure that uses input and output parameters with a rollback option
+
+delimiter //
+-- declaring the procedure name and input and output datatypes
+create procedure update_invoices_credit_total
+(
+in invoice_id_param int,
+in credit_total_param decimal(9,2),
+out update_count int
+)
+Begin
+declare sql_error tinyint default false;
+-- if an error occurs the value will be 'true'; the transaction is initialized with an update to invoices
+declare continue handler for sqlexception
+set sql_error=true;
+
+start transaction;
+
+update invoices
+set credit_total=credit_total_parem
+where invoice_id=invoice_id_param;
+-- if there is no error and it reads false, the data will be updated. Otherwise, the update count will be 0 and data will rollback to original value
+if sql_error = false then
+set update_count=1;
+commit;
+else set update_count=0;
+rollback;
+end if;
+End//
