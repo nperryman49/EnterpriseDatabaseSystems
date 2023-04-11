@@ -1,0 +1,21 @@
+-- Naomi Perryman Fall 2022
+-- Creating a function that performs and displays a calculation that can be used again later from input data
+
+delimiter //
+
+create function get_balance_due
+(
+invoice_id_param int
+)
+returns decimal(9,2)
+deterministic reads sql data
+begin
+
+declare balance_due_var decimal(9,2);
+select invoice_total-payment_total-credit_total
+into balance_due_var
+from invoices
+where invoice_id=invoice_id_param;
+
+return balance_due_var;
+end//
