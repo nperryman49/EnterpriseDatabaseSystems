@@ -1,0 +1,18 @@
+use naomi_guitar_shop;
+drop procedure if exists InsertCategory;
+delimiter //
+create procedure InsertCategory()
+Begin
+  declare duplicate_entry tinyint default false;
+  declare continue handler for 1060
+  set duplicate_entry=true;
+alter table categories add Winds varchar(50);
+  if duplicate_entry=true then
+  select "Row was not inserted- duplicate entry." as Message;
+  else
+  select "1 row was inserted." as Message;
+  end if;
+end //
+delimiter ;
+
+call InsertCategory();
