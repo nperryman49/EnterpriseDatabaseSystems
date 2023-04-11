@@ -1,0 +1,9 @@
+-- Naomi Perryman Fall 2022
+-- Creating a view from multiple tables from the guitar database to display together
+
+CREATE VIEW items_ordered AS
+SELECT products.product_name, order_items.item_price, order_items.quantity
+from products, order_items
+WHERE products.product_id=order_items.product_id;
+
+select distinct * from items_ordered;
